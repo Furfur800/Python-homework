@@ -62,7 +62,6 @@ while(True):
 	banner()
 	if (i==0):
 		rules()
-	
 	if (i > len(qa_array)-1):
 		stat(right,wrong,narko)
 		# https://habrahabr.ru/post/119436/
