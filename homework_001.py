@@ -79,4 +79,3 @@ while(True):
             wrong +=1
     except ValueError:
         narko +=1
-    
