@@ -116,6 +116,10 @@ input_func(">>>")
 while True:
     show_banner()
     show_movement_rules()
+    if (matrix == matrix_gen(num, True)):
+        show_table(matrix, num)
+        print(u" А вот и победитель!\n ..:: Game Over ::..")
+        break
     show_table(matrix, num)
     if (error != ""):
         print(error)
@@ -127,6 +131,3 @@ while True:
         matrix = move(matrix, movement)
     except IndexError:
         error=u" НАРКОМАН, краев не видишь?"
-    if (matrix == matrix_gen(num, True)):
-        print(u" А вот и победитель!\n ..:: Game Over ::..")
-        break
