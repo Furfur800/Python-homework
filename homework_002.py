@@ -28,18 +28,37 @@ def matrix_gen(num=4, final=False):
     return matrix
 
 def show_table(matrix, square_len=4):
-    #matrix
-    a = "|"+"%3s|"*square_len
-    b = "+"+"---+"*square_len
+    formatter_line = "   |"+"%3s|"*square_len
+    line = "   +"+"---+"*square_len
     i=0
     while(i<square_len):
-        print(b)
-        print (a % (tuple(matrix[i])))
+        print(line)
+        print (formatter_line % (tuple(matrix[i])))
         i+=1
-    print(b)
+    print(line + "\n")
 
-def show_rules():
-    pass
+def show_rules(num):
+    print(u" Все очень просто. Двигая пустую клетку, надо собрать такую же таблицу:")
+    print(" ")
+    show_table(matrix_gen(num, True),num)
+    print(u"\n Как соберете - так и выиграете.\n А не соберете - так вас съест Путин.")
+
+def show_movement_rules():
+    print(" "*10 + "="*30)
+    print(" "*20 + "games & vim")
+    print(" "*10 + u"  w, k - Движение вверх")
+    print(" "*10 + u"  s, j - Движение вниз")
+    print(" "*10 + u"  a, h - Движение влево")
+    print(" "*10 +u"  d, l - Движение вправо")
+    print(" "*10 +" "+ "="*30)
+
+def show_banner():
+    print("\n"*80)
+    print (" "*3 + "*"*50)
+    print (" "*3 + "**" + " "*46 + "**")
+    print (" "*3 + "**" + " "*5 + " Super-Puper-Mega-Pyatnashki ver.0.2 " + " "*4+ "**")
+    print (" "*3 + "**" + " "*46 + "**")
+    print (" "*3 + "*"*50)
 
 def coords(matrix):
     for i,line in enumerate(matrix):
@@ -71,14 +90,22 @@ def move(matrix, move_char):
         print(u"Нет такой клавиши!")
     return matrix
 
-
-print (u"Введите длину поля (2 - 15)")
+#Выбор уровня сложности
+show_banner()
+print (u"Введите длину поля (от 2 до 15, Anykey - 4):")
 try:
     num = int(input_func(">>>"))
     if num > 15 or num < 2:
         num = 4
 except ValueError:
     num = 4
+show_rules(num)
+print(u"\n Для продолжения нажмите Enter...")
+input_func(">>>")
+
+
+show_banner()
+show_movement_rules()
 matrix = matrix_gen(num)
 show_table(matrix, num)
 
@@ -86,18 +113,16 @@ while True:
     movement = input_func(">>>")
     try:
         matrix = move(matrix,movement)
+        show_banner()
+        show_movement_rules()
+        show_table(matrix,num)
     except IndexError:
-        print(u"ДЕРЖИ НАРКОМАНА!!! (Так ходить нельзя.)")
-    show_table(matrix,num)
+        show_banner()
+        show_movement_rules()
+        show_table(matrix,num)
+        print(u"ДЕРЖИ НАРКОМАНА!!! Так ходить нельзя.")
+    else:
+        print(" ")
     if (matrix == matrix_gen(num, True)):
         print(u"А вот и победитель!!!!!")
-
-# # Задача: реализовать игру Пятнашки
-# Условия задачи:
-# В начале игры создается поле размером 4 на 4, в каждом квадрате которого - число (15 суммарно), плюс один квадрат - пустой. В начале игры квадраты перемешаны в случайном порядке.
-# Пользователь может двигать пустой квадрат вверх, вниз, вправо и влево. Если двигать пустой квадрат нельзя по причине границы поля - пользователю нужно выдать сообщение об ошибке.
-# Игра считается завершенной, когда все квадраты стоят по порядку, пустой квадрат стоит в правом нижнем углу.
-# Технические требования:
-# Программа должна реализовывать предоставленный интерфейс и проходить тесты, которое к нему написаны.
-# Задачи на усложнение:
-# Код должен проходить проверку PEP8
+        exit()
