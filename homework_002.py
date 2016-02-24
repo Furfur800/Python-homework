@@ -113,6 +113,7 @@ matrix = matrix_gen(num)
 print(u"\n Для продолжения нажмите Enter...")
 input_func(">>>")
 
+#Основной цикл
 while True:
     show_banner()
     show_movement_rules()
@@ -129,4 +130,4 @@ while True:
         error=u" НАРКОМАН, краев не видишь?"
     if (matrix == matrix_gen(num, True)):
         print(u" А вот и победитель!\n ..:: Game Over ::..")
-        exit()
+        break
