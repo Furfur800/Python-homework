@@ -36,11 +36,17 @@ def rules():
 
 def question(some,num):
     print (">>")
-    print (u">> Вопрос №"+ str(num) +" "+some[0].decode('utf8'))
+    if sys.version_info[0] == 3:
+        print (u">> Вопрос №"+ str(num) +" "+some[0])
+    else:
+        print (u">> Вопрос №"+ str(num) +" "+some[0].decode('utf8'))
     print (">>\n")
     i=1
     while(i<len(some)-1):
-        print (u"\t "+ str(i) + u". " + str(some[i]).decode('utf8'))
+        if sys.version_info[0] == 3:
+            print (u"\t "+ str(i) + u". " + str(some[i]))
+        else:
+            print (u"\t "+ str(i) + u". " + str(some[i]).decode('utf8'))
         i+=1
 
 right = wrong = narko = i = 0
