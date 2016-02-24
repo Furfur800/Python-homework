@@ -5,7 +5,6 @@
 # MacOS - Python 2.7, 3.4
 # Win - Python 2.7
 
-
 import sys
 import random
 
@@ -17,7 +16,7 @@ else:
     input_func = raw_input
     range_func = xrange
 
-EMPTY_MARK = " "
+EMPTY_MARK = error = " "
 
 def matrix_gen(num=4, final=False):
     matrix = list(range_func(num**2))
@@ -73,29 +72,31 @@ def coords(matrix):
     return x, y
 
 def move(matrix, move_char):
+    global error
     x, y = coords(matrix)
-    if move_char == 'h' or move_char == 'a':
+    #if move_char == 'h' or move_char == 'a':
+    if move_char in ('h','a'):
         if (y - 1 >= 0):
             matrix[x][y],matrix[x][y-1] = matrix[x][y-1],matrix[x][y]
         else:
             raise IndexError()
-    elif move_char == 'j' or move_char == 's':
+    elif move_char in ('j', 's'):
         matrix[x][y],matrix[x+1][y] = matrix[x+1][y],matrix[x][y]
-    elif move_char == 'k' or move_char == 'w':
+    elif move_char in ('k', 'w'):
         if (x - 1 >= 0):
             matrix[x][y],matrix[x-1][y] = matrix[x-1][y],matrix[x][y]
         else:
             raise IndexError()
-    elif move_char == 'l' or move_char == 'd':
+    elif move_char in ('l','d'):
         matrix[x][y],matrix[x][y+1] = matrix[x][y+1],matrix[x][y]
     elif move_char == 'q':
-        print(u" Сдался, слабак? Сдался...\n Напиши об этом в ЖЖ.\n\n")
+        print(u" Сдался, слабак? Сдался...\n Напиши об этом в ЖЖ.")
         exit()
     elif move_char =='666':
         #Чит-код для выигрыша
         matrix = matrix_gen(len(matrix),True)
     else:
-        print(u"Нет такой клавиши!")
+        error=u" НАРКОМАН, по клавишам не попадаешь?"
     return matrix
 
 #Выбор уровня сложности
@@ -108,30 +109,24 @@ try:
 except ValueError:
     num = 4
 show_rules(num)
+matrix = matrix_gen(num)
 print(u"\n Для продолжения нажмите Enter...")
 input_func(">>>")
 
-
-show_banner()
-show_movement_rules()
-matrix = matrix_gen(num)
-show_table(matrix, num)
-print(" ") # Для выравнивания
-
 while True:
+    show_banner()
+    show_movement_rules()
+    show_table(matrix, num)
+    if (error != ""):
+        print(error)
+        error = ""
+    else:
+        print(" ")
     movement = input_func(">>>")
     try:
         matrix = move(matrix, movement)
-        show_banner()
-        show_movement_rules()
-        show_table(matrix, num)
     except IndexError:
-        show_banner()
-        show_movement_rules()
-        show_table(matrix, num)
-        print(u" ДЕРЖИТЕ НАРКОМАНА!!! Так ходить нельзя.")
-    else:
-        print(" ") # Тоже, для выравнивания
+        error=u" НАРКОМАН, краев не видишь?"
     if (matrix == matrix_gen(num, True)):
         print(u" А вот и победитель!\n ..:: Game Over ::..")
         exit()
