@@ -74,7 +74,6 @@ def coords(matrix):
 def move(matrix, move_char):
     global error
     x, y = coords(matrix)
-    #if move_char == 'h' or move_char == 'a':
     if move_char in ('h','a'):
         if (y - 1 >= 0):
             matrix[x][y],matrix[x][y-1] = matrix[x][y-1],matrix[x][y]
