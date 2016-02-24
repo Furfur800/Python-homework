@@ -38,15 +38,14 @@ def show_table(matrix, square_len=4):
     i=0
     while(i<square_len):
         print(line)
-        print (formatter_line % (tuple(matrix[i])))
+        print(formatter_line % (tuple(matrix[i])))
         i+=1
     print(line + "\n")
 
 def show_rules(num):
-    print(u" Все очень просто. Двигая пустую клетку, надо собрать такую же таблицу:")
-    print(" ")
+    print(u" Все очень просто. Двигая пустую клетку, надо собрать такую же таблицу:\n")
     show_table(matrix_gen(num, True),num)
-    print(u"\n Как соберете - так и выиграете.\n А не соберете - так вас съест Путин.")
+    print(u"\n Как соберете - так и выиграете.\n А если не соберете - тогда вас съест Путин.")
 
 def show_movement_rules():
     print(" "*10 + "="*30)
@@ -60,11 +59,11 @@ def show_movement_rules():
 
 def show_banner():
     print("\n"*80)
-    print (" "*3 + "*"*50)
-    print (" "*3 + "**" + " "*46 + "**")
-    print (" "*3 + "**" + " "*5 + " Super-Puper-Mega-Pyatnashki ver.0.2 " + " "*4+ "**")
-    print (" "*3 + "**" + " "*46 + "**")
-    print (" "*3 + "*"*50)
+    print(" "*3 + "*"*50)
+    print(" "*3 + "**" + " "*46 + "**")
+    print(" "*3 + "**" + " "*5 + " Super-Puper-Mega-Pyatnashki ver.0.2 " + " "*4+ "**")
+    print(" "*3 + "**" + " "*46 + "**")
+    print(" "*3 + "*"*50)
 
 def coords(matrix):
     for i,line in enumerate(matrix):
@@ -90,7 +89,7 @@ def move(matrix, move_char):
     elif move_char == 'l' or move_char == 'd':
         matrix[x][y],matrix[x][y+1] = matrix[x][y+1],matrix[x][y]
     elif move_char == 'q':
-        print(u"Сдался, слабак? Сдался... Напиши об этом в ЖЖ.")
+        print(u" Сдался, слабак? Сдался...\n Напиши об этом в ЖЖ.\n\n")
         exit()
     elif move_char =='666':
         #Чит-код для выигрыша
@@ -101,7 +100,7 @@ def move(matrix, move_char):
 
 #Выбор уровня сложности
 show_banner()
-print (u"Введите длину поля (от 2 до 10, Enter/Anykey + Enter - 4):")
+print (u" Введите длину поля (от 2 до 10, Enter/Anykey+Enter - 4):")
 try:
     num = int(input_func(">>>"))
     if num > 15 or num < 2:
@@ -117,22 +116,22 @@ show_banner()
 show_movement_rules()
 matrix = matrix_gen(num)
 show_table(matrix, num)
-print(" ")
+print(" ") # Для выравнивания
 
 while True:
     movement = input_func(">>>")
     try:
-        matrix = move(matrix,movement)
+        matrix = move(matrix, movement)
         show_banner()
         show_movement_rules()
-        show_table(matrix,num)
+        show_table(matrix, num)
     except IndexError:
         show_banner()
         show_movement_rules()
-        show_table(matrix,num)
+        show_table(matrix, num)
         print(u" ДЕРЖИТЕ НАРКОМАНА!!! Так ходить нельзя.")
     else:
-        print(" ")
+        print(" ") # Тоже, для выравнивания
     if (matrix == matrix_gen(num, True)):
         print(u" А вот и победитель!\n ..:: Game Over ::..")
         exit()
