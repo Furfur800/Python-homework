@@ -64,7 +64,6 @@ while(True):
         rules()
     if (i > len(qa_array)-1):
         stat(right,wrong,narko)
-        
         if(sys.platform == 'win32'):
         	print("   Game Over...   ")
         else:
