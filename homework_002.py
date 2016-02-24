@@ -1,6 +1,11 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
+# Tested on:
+# MacOS - Python 2.7, 3.4
+# Win - Python 2.7
+
+
 import sys
 import random
 
@@ -21,7 +26,7 @@ def matrix_gen(num=4, final=False):
     if final == False:
         random.shuffle(matrix)
     # Разбить лист на N частей. Магия из справочника Python.
-    matrix = zip(*[iter(matrix)] * num) 
+    matrix = list(zip(*[iter(matrix)] * num))
     for x in matrix[:]:
         matrix.remove(x)
         matrix.append(list(x))
@@ -46,11 +51,12 @@ def show_rules(num):
 def show_movement_rules():
     print(" "*10 + "="*30)
     print(" "*20 + "games & vim")
-    print(" "*10 + u"  w, k - Движение вверх")
-    print(" "*10 + u"  s, j - Движение вниз")
-    print(" "*10 + u"  a, h - Движение влево")
-    print(" "*10 +u"  d, l - Движение вправо")
-    print(" "*10 +" "+ "="*30)
+    print(" "*10 + u"   w, k - Движение вверх")
+    print(" "*10 + u"   s, j - Движение вниз")
+    print(" "*10 + u"   a, h - Движение влево")
+    print(" "*10 + u"   d, l - Движение вправо")
+    print(" "*10 + u"      q - Сдаться")
+    print(" "*10 + "="*30)
 
 def show_banner():
     print("\n"*80)
@@ -84,15 +90,18 @@ def move(matrix, move_char):
     elif move_char == 'l' or move_char == 'd':
         matrix[x][y],matrix[x][y+1] = matrix[x][y+1],matrix[x][y]
     elif move_char == 'q':
-        print(u"Сдался, слабак?")
+        print(u"Сдался, слабак? Сдался... Напиши об этом в ЖЖ.")
         exit()
+    elif move_char =='666':
+        #Чит-код для выигрыша
+        matrix = matrix_gen(len(matrix),True)
     else:
         print(u"Нет такой клавиши!")
     return matrix
 
 #Выбор уровня сложности
 show_banner()
-print (u"Введите длину поля (от 2 до 15, Anykey - 4):")
+print (u"Введите длину поля (от 2 до 10, Enter/Anykey + Enter - 4):")
 try:
     num = int(input_func(">>>"))
     if num > 15 or num < 2:
@@ -108,6 +117,7 @@ show_banner()
 show_movement_rules()
 matrix = matrix_gen(num)
 show_table(matrix, num)
+print(" ")
 
 while True:
     movement = input_func(">>>")
@@ -120,9 +130,9 @@ while True:
         show_banner()
         show_movement_rules()
         show_table(matrix,num)
-        print(u"ДЕРЖИ НАРКОМАНА!!! Так ходить нельзя.")
+        print(u" ДЕРЖИТЕ НАРКОМАНА!!! Так ходить нельзя.")
     else:
         print(" ")
     if (matrix == matrix_gen(num, True)):
-        print(u"А вот и победитель!!!!!")
+        print(u" А вот и победитель!\n ..:: Game Over ::..")
         exit()
