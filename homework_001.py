@@ -64,8 +64,12 @@ while(True):
         rules()
     if (i > len(qa_array)-1):
         stat(right,wrong,narko)
-        # https://habrahabr.ru/post/119436/
-        print("  \033[41m   Game over...  \033[0m\n\n")
+        
+        if(sys.platform == 'win32'):
+        	print("   Game Over...   ")
+        else:
+        	# Цветной вывод - https://habrahabr.ru/post/119436/
+        	print("  \033[41m   Game over...  \033[0m\n\n")
         break
     question(qa_array[i],i)
     answer = input_func("\n>>")
