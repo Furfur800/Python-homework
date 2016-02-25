@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import random  # see https://docs.python.org/2/library/random.html

@@ -1,0 +1,30 @@
+jack@ripper:~/Desktop/Development/Python/tceh/game_with_tests$ python tests.py
+Starting tests for: TestIsGameFinished
+Finished class' tests: 2/2
+
+Starting tests for: TestPerformMove
+Finished class' tests: 5/5
+
+Starting tests for: TestShuffleField
+Finished class' tests: 2/2
+
+Starting tests for: TestUserInput
+>>>w
+Finished class' tests: 1/1
+
+Total fails: 0
+jack@ripper:~/Desktop/Development/Python/tceh/game_with_tests$ python3 tests.py
+Starting tests for: TestIsGameFinished
+Finished class' tests: 2/2
+
+Starting tests for: TestPerformMove
+Finished class' tests: 5/5
+
+Starting tests for: TestShuffleField
+Finished class' tests: 2/2
+
+Starting tests for: TestUserInput
+>>>w
+Finished class' tests: 1/1
+
+Total fails: 0
